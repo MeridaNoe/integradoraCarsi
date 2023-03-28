@@ -1,4 +1,6 @@
 package mx.edu.utez.centro_pokemon.models.citamedica;
 
-public interface CitaMedicaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CitaMedicaRepository extends JpaRepository<CitaMedica, Integer> {
 }

@@ -1,4 +1,6 @@
 package mx.edu.utez.centro_pokemon.models.person;
 
-public interface PersonRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PersonRepository extends JpaRepository<Person, Integer> {
 }
