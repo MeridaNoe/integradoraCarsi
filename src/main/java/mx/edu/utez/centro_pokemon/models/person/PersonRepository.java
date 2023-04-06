@@ -1,6 +1,10 @@
 package mx.edu.utez.centro_pokemon.models.person;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface PersonRepository extends JpaRepository<Person, Integer> {
+import java.util.List;
+
+public interface PersonRepository extends MongoRepository<Person, Integer> {
+   List<Person> findByName(String name);
 }

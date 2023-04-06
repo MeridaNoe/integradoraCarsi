@@ -1,9 +1,12 @@
-package mx.edu.utez.centro_pokemon.controller.consultorio;
+package mx.edu.utez.centro_pokemon.controller.region;
 
 import jakarta.validation.Valid;
-import mx.edu.utez.centro_pokemon.controller.consultorio.dtos.ConsultorioDTO;
-import mx.edu.utez.centro_pokemon.models.consultorio.Consultorio;
-import mx.edu.utez.centro_pokemon.service.consultorio.ConsultorioService;
+import mx.edu.utez.centro_pokemon.controller.pokemon.dtos.PokemonDTO;
+import mx.edu.utez.centro_pokemon.controller.region.dtos.RegionDTO;
+import mx.edu.utez.centro_pokemon.models.pokemon.Pokemon;
+import mx.edu.utez.centro_pokemon.models.region.Region;
+import mx.edu.utez.centro_pokemon.service.pokemon.PokemonService;
+import mx.edu.utez.centro_pokemon.service.region.RegionService;
 import mx.edu.utez.centro_pokemon.utils.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api-centro/consultorio")
+@RequestMapping("/api-centro/region")
 @CrossOrigin(origins = {"*"})
-public class ConsultorioController {
+public class RegionController {
     @Autowired
-    private ConsultorioService service;
+    private RegionService service;
 
     @GetMapping("/")
-    public ResponseEntity<CustomResponse<List<Consultorio>>> getAll() {
+    public ResponseEntity<CustomResponse<List<Region>>> getAll() {
         return new ResponseEntity<>(
                 this.service.getAll(),
                 HttpStatus.OK
@@ -29,7 +32,7 @@ public class ConsultorioController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomResponse<Consultorio>> getOne(@PathVariable("id") Integer id) {
+    public ResponseEntity<CustomResponse<Region>> getOne(@PathVariable("id") Integer id) {
         return new ResponseEntity<>(
                 this.service.getOne(id),
                 HttpStatus.OK
@@ -38,10 +41,10 @@ public class ConsultorioController {
 
     @PostMapping("/")
     public ResponseEntity<CustomResponse<Object>> insert(
-            @Valid @RequestBody ConsultorioDTO consultorioDTO
+            @Valid @RequestBody RegionDTO regionDTO
     ) {
         return new ResponseEntity<>(
-                this.service.insert(consultorioDTO.getConsultorio()),
+                this.service.insert(regionDTO.getRegion()),
                 HttpStatus.CREATED);
     }
 }

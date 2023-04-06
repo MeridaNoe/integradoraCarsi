@@ -37,7 +37,7 @@ public class PersonController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<CustomResponse<Person>> insert(
+    public ResponseEntity<CustomResponse<Object>> insert(
             @Valid @RequestBody PersonDTO personDTO
     ) {
         return new ResponseEntity<>(

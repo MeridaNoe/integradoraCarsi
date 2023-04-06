@@ -33,14 +33,14 @@ public class ConsultorioService {
     }
 
     @Transactional(rollbackFor = {SQLException.class})
-    public CustomResponse<Consultorio> insert(Consultorio consultorio) {
+    public CustomResponse<Object> insert(Consultorio consultorio) {
         if (this.repository.existsById(consultorio.getIdConsultorio()))
             return new CustomResponse<>(
                     null, true, 400,
                     "Consultorio ya existe"
             );
         return new CustomResponse<>(
-                this.repository.saveAndFlush(consultorio),
+                this.repository.save(consultorio),
                 false, 200,
                 "Consultorio registrado correctamente"
         );

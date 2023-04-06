@@ -37,7 +37,7 @@ public class EspecieController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<CustomResponse<Especie>> insert(
+    public ResponseEntity<CustomResponse<Object>> insert(
             @Valid @RequestBody EspecieDTO especieDTO
     ) {
         return new ResponseEntity<>(

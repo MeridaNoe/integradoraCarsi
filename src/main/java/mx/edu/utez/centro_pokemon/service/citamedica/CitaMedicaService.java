@@ -26,22 +26,22 @@ public class CitaMedicaService {
     }
 
     @Transactional(readOnly = true)
-    public CustomResponse<CitaMedica> getOne(Integer id) {
+    public CustomResponse<List<CitaMedica>> getOne(String padecimiento) {
         return new CustomResponse<>(
-                this.repository.findById(id).get(),
+                this.repository.findByPadecimiento(padecimiento),
                 false, 200, "OK"
         );
     }
 
     @Transactional(rollbackFor = {SQLException.class})
-    public CustomResponse<CitaMedica> insert(CitaMedica citaMedica) {
-        if (this.repository.existsById( citaMedica.getIdCitaMedica()))
+    public CustomResponse<Object> insert(CitaMedica citaMedica) {
+        if (this.repository.existsById(citaMedica.getPadecimiento()))
             return new CustomResponse<>(
                     null, true, 400,
                     "La cita medica ya existe"
             );
         return new CustomResponse<>(
-                this.repository.saveAndFlush(citaMedica),
+                this.repository.save(citaMedica),
                 false, 200,
                 "Cita medica registrada correctamente"
         );

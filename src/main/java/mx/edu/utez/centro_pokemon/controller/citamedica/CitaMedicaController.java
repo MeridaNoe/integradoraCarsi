@@ -30,16 +30,16 @@ public class CitaMedicaController {
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CustomResponse<CitaMedica>> getOne(@PathVariable("id") Integer id) {
+    @GetMapping("/{padecimiento}")
+    public ResponseEntity<CustomResponse<List<CitaMedica>>> getOne(@PathVariable("padecimiento") String padecimiento) {
         return new ResponseEntity<>(
-                this.service.getOne(id),
+                this.service.getOne(padecimiento),
                 HttpStatus.OK
         );
     }
 
     @PostMapping("/")
-    public ResponseEntity<CustomResponse<CitaMedica>> insert(
+    public ResponseEntity<CustomResponse<Object>> insert(
             @Valid @RequestBody CitaMedicaDTO citaMedicaDTO
     ) {
         return new ResponseEntity<>(

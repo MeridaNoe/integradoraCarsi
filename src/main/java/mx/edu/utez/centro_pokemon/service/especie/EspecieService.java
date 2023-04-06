@@ -33,14 +33,14 @@ public class EspecieService {
     }
 
     @Transactional(rollbackFor = {SQLException.class})
-    public CustomResponse<Especie> insert(Especie especie) {
+    public CustomResponse<Object> insert(Especie especie) {
         if (this.repository.existsById(especie.getIdEspecie()))
             return new CustomResponse<>(
                     null, true, 400,
                     "Especie ya existe"
             );
         return new CustomResponse<>(
-                this.repository.saveAndFlush(especie),
+                this.repository.save(especie),
                 false, 200,
                 "Especie registrada correctamente"
         );

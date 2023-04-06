@@ -1,7 +1,7 @@
-package mx.edu.utez.centro_pokemon.service.person;
+package mx.edu.utez.centro_pokemon.service.tipopokemon;
 
-import mx.edu.utez.centro_pokemon.models.person.Person;
-import mx.edu.utez.centro_pokemon.models.person.PersonRepository;
+import mx.edu.utez.centro_pokemon.models.tipopokemon.TipoPokemon;
+import mx.edu.utez.centro_pokemon.models.tipopokemon.TipoPokemonRepository;
 import mx.edu.utez.centro_pokemon.utils.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PersonService {
+public class TipoPokemonService {
     @Autowired
-    private PersonRepository repository;
+    private TipoPokemonRepository repository;
 
     @Transactional(readOnly = true)
-    public CustomResponse<List<Person>> getAll() {
+    public CustomResponse<List<TipoPokemon>> getAll() {
         return new CustomResponse<>(
                 this.repository.findAll(),
                 false, 200, "ok"
@@ -25,7 +25,7 @@ public class PersonService {
     }
 
     @Transactional(readOnly = true)
-    public CustomResponse<Person> getOne(Integer id) {
+    public CustomResponse<TipoPokemon> getOne(Integer id) {
         return new CustomResponse<>(
                 this.repository.findById(id).get(),
                 false, 200, "OK"
@@ -33,16 +33,16 @@ public class PersonService {
     }
 
     @Transactional(rollbackFor = {SQLException.class})
-    public CustomResponse<Object> insert(Person person) {
-        if (this.repository.existsById(person.getIdPerson()))
+    public CustomResponse<Object> insert(TipoPokemon tipoPokemon) {
+        if (this.repository.existsById(tipoPokemon.getIdTipoPokemon()))
             return new CustomResponse<>(
                     null, true, 400,
-                    "Persona ya existe"
+                    "Tipo de pokemon ya existe"
             );
         return new CustomResponse<>(
-                this.repository.save(person),
+                this.repository.save(tipoPokemon),
                 false, 200,
-                "Persona registrada correctamente"
+                "Tipo de pokemon registrado correctamente"
         );
     }
 }

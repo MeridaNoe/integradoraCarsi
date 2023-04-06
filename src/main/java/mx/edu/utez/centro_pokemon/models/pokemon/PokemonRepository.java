@@ -1,4 +1,9 @@
 package mx.edu.utez.centro_pokemon.models.pokemon;
 
-public interface PokemonRepository {
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.List;
+
+public interface PokemonRepository extends MongoRepository<Pokemon, Integer> {
+    List<Pokemon> findByNombre(String nombre);
 }

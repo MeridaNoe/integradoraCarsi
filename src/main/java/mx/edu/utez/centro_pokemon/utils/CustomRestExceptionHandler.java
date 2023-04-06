@@ -2,6 +2,7 @@ package mx.edu.utez.centro_pokemon.utils;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,11 +17,7 @@ import java.util.List;
 public class CustomRestExceptionHandler
         extends ResponseEntityExceptionHandler {
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         List<String> errors = new ArrayList<>();
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             errors.add(error.getField() + ":" + error.getDefaultMessage());
@@ -30,4 +27,6 @@ public class CustomRestExceptionHandler
         return handleExceptionInternal(
                 ex, apiError, headers, HttpStatus.BAD_REQUEST, request);
     }
+
+
 }
